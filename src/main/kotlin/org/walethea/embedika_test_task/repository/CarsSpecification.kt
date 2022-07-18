@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.Specification
 import org.walethea.embedika_test_task.entity.CarEntity
 import org.walethea.embedika_test_task.entity.enums.CarBrandsEnum
 import java.time.Year
+import java.util.*
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
@@ -46,7 +47,7 @@ object CarsSpecification {
     }
 
 
-    fun hasDateOfBirth(dateOfBirth: Year): Specification<CarEntity?> {
+    fun hasDateOfBirth(dateOfBirth: Year?): Specification<CarEntity?> {
         return Specification { transaction: Root<CarEntity?>, cq: CriteriaQuery<*>?, cb: CriteriaBuilder ->
             cb.equal(
                 transaction.get<Any>("dateOfBirth"),

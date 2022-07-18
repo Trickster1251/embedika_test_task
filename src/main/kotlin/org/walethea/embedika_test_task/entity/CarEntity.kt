@@ -11,13 +11,17 @@ class CarEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
+
     var licensePlate : String,
-    @Column(name = "brand")
+
     @Enumerated(EnumType.STRING)
     var brand : CarBrandsEnum,
-    var color : String,
+
+    var color : String?,
+
+//    @Convert(converter = YearAttributeConverter::class)
     var dateOfBirth : Year?,
-    @Column(name = "created_at")
+
     @Temporal(TemporalType.TIMESTAMP)
     var createdAt : Date?
 ) {

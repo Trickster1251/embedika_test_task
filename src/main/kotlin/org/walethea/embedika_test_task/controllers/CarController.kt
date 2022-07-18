@@ -5,9 +5,11 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import org.walethea.embedika_test_task.entity.CarEntity
 import org.walethea.embedika_test_task.entity.enums.CarBrandsEnum
+import org.walethea.embedika_test_task.responces.DBStatsJSONResponse
 import org.walethea.embedika_test_task.responces.JSONResponse
 import org.walethea.embedika_test_task.service.CarService
 import java.time.Year
+import java.util.*
 
 @RestController
 @RequestMapping("/cars" ,produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -25,13 +27,13 @@ class CarController(
         return service.getAll(id, color, licensePlate, brand, dateOfBirth)
     }
 
-//    @GetMapping("/{id}")
-//    fun getById(@PathVariable id: Long): List<CarEntity>{
-//        return service.getById(id)
-//    }
+    @GetMapping("/stats")
+    fun getStatsDBData() : DBStatsJSONResponse {
+        return service.getStatsDB()
+    }
 
     @PostMapping()
-    fun addCar(car: CarEntity): JSONResponse {
+    fun addCar(@RequestBody car: CarEntity): JSONResponse {
         return service.add(car)
     }
 
