@@ -3,7 +3,7 @@
 ## Endpoints
 
 ### GET  
- **/cars/** return all cars with get parametrs for filtering
+ **/cars/** return all cars with get parametrs for filtering  
  **/cars/{id}** return car with id  
  **/cars/stats** return information about first and last date record in table, and count records  
  
