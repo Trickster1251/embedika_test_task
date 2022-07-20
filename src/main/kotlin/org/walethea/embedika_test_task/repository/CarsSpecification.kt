@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root
 
 object CarsSpecification {
     fun hasColor(color: String): Specification<CarEntity?> {
-        return Specification { transaction: Root<CarEntity?>, cq: CriteriaQuery<*>?, cb: CriteriaBuilder ->
+        return Specification { transaction: Root<CarEntity?>, _, cb: CriteriaBuilder ->
             cb.equal(
                 transaction.get<Any>("color"),
                 color
@@ -20,7 +20,7 @@ object CarsSpecification {
     }
 
     fun hasBrand(brand: CarBrandsEnum): Specification<CarEntity?> {
-        return Specification { transaction: Root<CarEntity?>, cq: CriteriaQuery<*>?, cb: CriteriaBuilder ->
+        return Specification { transaction: Root<CarEntity?>, _, cb: CriteriaBuilder ->
             cb.equal(
                 transaction.get<Any>("brand"),
                 brand
@@ -29,7 +29,7 @@ object CarsSpecification {
     }
 
     fun hasLicensePlate(licensePlate: String): Specification<CarEntity?> {
-        return Specification { transaction: Root<CarEntity?>, cq: CriteriaQuery<*>?, cb: CriteriaBuilder ->
+        return Specification { transaction: Root<CarEntity?>, _, cb: CriteriaBuilder ->
             cb.equal(
                 transaction.get<Any>("licensePlate"),
                 licensePlate
@@ -38,7 +38,7 @@ object CarsSpecification {
     }
 
     fun hasId(id: Long): Specification<CarEntity?> {
-        return Specification { transaction: Root<CarEntity?>, cq: CriteriaQuery<*>?, cb: CriteriaBuilder ->
+        return Specification { transaction: Root<CarEntity?>, _, cb: CriteriaBuilder ->
             cb.equal(
                 transaction.get<Any>("id"),
                 id
@@ -48,7 +48,7 @@ object CarsSpecification {
 
 
     fun hasDateOfBirth(dateOfBirth: Year?): Specification<CarEntity?> {
-        return Specification { transaction: Root<CarEntity?>, cq: CriteriaQuery<*>?, cb: CriteriaBuilder ->
+        return Specification { transaction: Root<CarEntity?>, _, cb: CriteriaBuilder ->
             cb.equal(
                 transaction.get<Any>("dateOfBirth"),
                 dateOfBirth

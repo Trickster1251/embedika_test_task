@@ -1,4 +1,4 @@
-package org.walethea.embedika_test_task.entity
+package org.walethea.embedika_test_task.entity.converters
 
 import java.time.Year
 import javax.persistence.AttributeConverter

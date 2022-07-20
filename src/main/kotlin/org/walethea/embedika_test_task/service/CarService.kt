@@ -5,12 +5,9 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.jpa.domain.Specification.where
 import org.springframework.stereotype.Service
-import org.springframework.validation.BindingResult
-import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestBody
 import org.walethea.embedika_test_task.entity.CarEntity
 import org.walethea.embedika_test_task.entity.enums.CarBrandsEnum
+import org.walethea.embedika_test_task.exceptions.NotValidBrandNameException
 import org.walethea.embedika_test_task.exceptions.ObjectAlreadyExistsException
 import org.walethea.embedika_test_task.exceptions.ObjectNotFoundException
 import org.walethea.embedika_test_task.repository.CarsRepository
@@ -52,13 +49,19 @@ class CarService(
         return try {
             if (repository.findByLicensePlate(entity.licensePlate) != null)
                 throw ObjectAlreadyExistsException()
+            if (!CarBrandsEnum.values().contains(entity.brand))
+                throw NotValidBrandNameException()
             entity.createdAt = Date()
             repository.save(entity)
             JSONResponse(201, "Successfully created")
         } catch (e: Exception) {
-            JSONResponse(500, e.message!!)
-        } catch (e: ObjectAlreadyExistsException){
-            JSONResponse(409, ObjectAlreadyExistsException().message!!)
+
+            var http_code = 500
+            if (e is ObjectNotFoundException || e is NotValidBrandNameException) {
+                http_code = 409
+            }
+
+            JSONResponse(http_code, e.message!!)
         }
     }
 
@@ -74,7 +77,7 @@ class CarService(
     fun getStatsDB(): DBStatsJSONResponse {
         val dbInfo = repository.findAll(Sort.by("createdAt"))
         return DBStatsJSONResponse(200,
-            first_record_be_created = dbInfo.get(0).createdAt,
+            first_record_be_created = dbInfo.first().createdAt,
             last_record_be_created = dbInfo.last().createdAt,
             record_count = dbInfo.count())
     }

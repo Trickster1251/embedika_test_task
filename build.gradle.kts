@@ -26,6 +26,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-java8
     implementation("org.hibernate:hibernate-java8:5.6.10.Final")
 
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation("org.postgresql:postgresql:42.4.0")
+
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
