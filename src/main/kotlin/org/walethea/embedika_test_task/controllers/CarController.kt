@@ -1,6 +1,7 @@
 package org.walethea.embedika_test_task.controllers
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import org.walethea.embedika_test_task.entity.CarEntity
@@ -18,6 +19,7 @@ class CarController(
 ){
 
     @GetMapping("/","/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
     fun getCars(@PathVariable(required = false) id: Long?,
                 @RequestParam color : String?,
                 @RequestParam brand : CarBrandsEnum?,
@@ -28,16 +30,19 @@ class CarController(
     }
 
     @GetMapping("/stats")
+    @ResponseStatus(code = HttpStatus.OK)
     fun getStatsDBData() : DBStatsJSONResponse {
         return service.getStatsDB()
     }
 
     @PostMapping()
+    @ResponseStatus(code = HttpStatus.CREATED)
     fun addCar(@RequestBody car: CarEntity): JSONResponse {
         return service.add(car)
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
     fun removeCar(@PathVariable id : Long): JSONResponse{
         return service.remove(id)
     }
