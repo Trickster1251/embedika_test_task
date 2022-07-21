@@ -10,7 +10,6 @@ import org.walethea.embedika_test_task.responces.DBStatsJSONResponse
 import org.walethea.embedika_test_task.responces.JSONResponse
 import org.walethea.embedika_test_task.service.CarService
 import java.time.Year
-import java.util.*
 
 @RestController
 @RequestMapping("/cars" ,produces = [MediaType.APPLICATION_JSON_VALUE])

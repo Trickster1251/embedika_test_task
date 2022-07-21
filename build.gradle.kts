@@ -29,6 +29,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation("org.postgresql:postgresql:42.4.0")
 
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+//    implementation("org.springframework.boot:spring-boot-starter-security:2.7.1")
+
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
